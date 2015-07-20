@@ -27,6 +27,7 @@ abstract sealed class ConflictSet {
     case (_, NoConflict) => this  
     case (NoConflict, _) => cs
     case (Conflicts(gen1, sa1), Conflicts(gen2, sa2)) => Conflicts(gen1 ++ gen2, Math.max(sa1, sa2))
+    case _ => FoundSolution
   }
 }
 
@@ -42,8 +43,5 @@ case object FoundSolution extends ConflictSet {
 
 case class Conflicts(generators: Set[Generator], stepAssigned: Int) extends ConflictSet
 
-object ConflictUtils {
-  
-}
 
 
